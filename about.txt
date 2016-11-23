@@ -1,0 +1,8 @@
+任务：生命游戏
+选用语言：html+Javascrip
+开发工具：Hbuider、CHrome
+代码管理：github
+团队管理：teambition
+代码质量检测：JSLint
+单元测试：QUnit、Jasmine
+
