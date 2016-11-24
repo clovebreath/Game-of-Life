@@ -4,6 +4,7 @@ var btnPause = document.getElementById('btnPause');
 var btnReset = document.getElementById('btnReset');
 var btnRandom = document.getElementById('btnRandom');
 var btnLoad = document.getElementById('btnLoad');
+var btnChange = document.getElementById('btnChange');
 var context = canvas.getContext('2d');
 var timerInterval = 100; // ms  
 var cellWidth = 10; // please ensure: cellWidth > 2  
@@ -23,22 +24,23 @@ var preCells = [
 	[[22,24],[22,25],[22,26],[22,30],[22,31],[22,32],[27,24],[27,25],[27,26],[27,30],[27,31],[27,32],[29,24],[29,25],[29,26],[29,30],[29,31],[29,32],[34,24],[34,25],[34,26],[34,30],[34,31],[34,32],
 	[24,22],[24,27],[24,29],[24,34],[25,22],[25,27],[25,29],[25,34],[26,22],[26,27],[26,29],[26,34],[30,22],[30,27],[30,29],[30,34],[31,22],[31,27],[31,29],[31,34],[32,22],[32,27],[32,29],[32,34]]
 ]
-var frontColor = "Gold";
-var strokeColor = "DarkGoldenRod";
-var bgColor = "#eeeeee";
+var frontColor = ["Gold","#2828FF","#FF0000","#28FF28"];
+var strokeColor = ["DarkGoldenRod","#00FFFF","#600000","#006000"];
+var fontIndex=3;
 
 function drawCell(x, y, state) {
 	var cx = x * cellWidth;
 	var cy = y * cellWidth;
 	if(state && state == 1) {
-		context.fillStyle = "Gold";
+		context.fillStyle = frontColor[fontIndex];
 		context.fillRect(cx, cy, cellWidth, cellWidth);
-		context.strokeStyle = "DarkGoldenRod";
+		context.strokeStyle = strokeColor[fontIndex];
 		context.strokeRect(cx + 1, cy + 1, cellWidth - 2, cellWidth - 2);
 	} else {
 		context.clearRect(cx, cy, cellWidth, cellWidth);
 	}
 }
+
 function setCell(x, y) {
 	cells[[x, y]] = 1;
 	drawCell(x, y, 1);
@@ -174,6 +176,26 @@ function load() {
 	index %= preCells.length; 
 	for(i=0;i<preCells[index].length;i++){
 		setCell(preCells[index][i][0],preCells[index][i][1]);
+	}
+}
+
+function changeCol(){
+	fontIndex += 1;
+	fontIndex %= frontColor.length;
+	if(running==1){
+		for(var i =0;i<50;i++){
+			for(var j=0;j<50;j++){
+				if(cells[[i,j]]==1)
+					drawCell(i,j,1);
+			}
+		}
+	}else{
+		for(var i =0;i<50;i++){
+			for(var j=0;j<50;j++){
+				if(cells[[i,j]]==1)
+					drawCell(i,j,1);
+			}
+		}
 	}
 }
 
