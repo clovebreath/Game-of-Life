@@ -14,6 +14,7 @@ var cells = [];
 var running = 0;
 var generation = 0;
 var index=1;
+var paint = false;
 var preCells = [
 	[[10,12],[10,13],[11,11],[11,12],[11,13],[12,11],[12,12],[12,14],[13,12],[13,13],[13,14],[14,13],
 	[35,36],[36,35],[36,36],[36,37],[37,35],[37,37],[37,38],[38,36],[38,37],[38,38],[39,36],[39,37]],
@@ -58,19 +59,18 @@ function drawPatterns() {
 }
 
 function applyRule(x, y) {
-	//              var neighbours = [];  
 	var neighbourCount = 0;
 	var currentState = cells[[x, y]];
 	var nextState = 0;
-	for(m = x - 1; m < x + 2; m++) {
+	for(m = x - 1; m < x + 2; m++) {//对每个格子，计算邻居数目
 		for(n = y - 1; n < y + 2; n++) {
 			if(m != x || n != y) {
-				neighbourCount += cells[[(m + cellXLen) % cellXLen, (n + cellYLen) % cellYLen]];
+				neighbourCount += cells[[(m + cellXLen) % cellXLen,(n + cellYLen) % cellYLen]];
 			}
 		}
 	}
 
-	if(currentState && currentState == 1) {
+	if(currentState && currentState == 1) {//决定是否存活
 		if(neighbourCount < 2 || neighbourCount > 3)
 			return 0;
 		else
@@ -84,9 +84,12 @@ function applyRule(x, y) {
 }
 
 function loadGame() {
+
 	canvas.onmousedown = function(e) {
 		if(running == 1)
-			return;
+			return;		
+			
+		paint = !paint;
 		if(e.offsetX) {
 			x = e.offsetX;
 			y = e.offsetY;
@@ -103,9 +106,35 @@ function loadGame() {
 		} else {
 			cells[[x, y]] = 1;
 			drawCell(x, y, 1);
+		}			
+	}
+
+	canvas.onmousemove = function(e) {
+		
+		if(running == 1)
+			return;		
+		if(paint){
+			if(e.offsetX) {
+				x = e.offsetX;
+				y = e.offsetY;
+			} else if(e.layerX) {
+				x = e.layerX;
+				y = e.layerY;
+			}
+			x = Math.floor(x / cellWidth);
+			y = Math.floor(y / cellWidth);
+			cells[[x, y]] = 1;
+			drawCell(x, y, 1);				
 		}
 	}
-//	drawPatterns();
+	
+	canvas.onmouseup = function(e) {
+		if(running == 1)
+			return;	
+		paint = !paint;
+	}
+
+
 }
 
 function startGame() {
