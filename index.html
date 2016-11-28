@@ -3,16 +3,15 @@
     <head>  
         <meta charset="utf-8"/>  
         <title>生命有限，不要游戏</title>  
-        <style type="text/css" mce_bogus="1">  
-            table {margin:auto;}  
-                </style>  
-    </head>  
+        <link rel="stylesheet" type="text/css" href="css/gol.css"/> 
+	</head>  
+	
     <body>  
         <table>  
-            <tr align="center"><td colspan="2" ><h3>生命游戏</h3><hr height="1px"/></td></tr>  
-            <tr>  
-                <td align="left">世代： <span id="spanGen">0</span></td>  
-                <td align="right">  
+            <tr id="tittle"><td colspan="2" ><h3>生命游戏</h3></td></tr>  
+            <tr id="button">  
+                <td >世代： <span id="spanGen">0</span></td>  
+                <td >  
                     <button id="btnStart" onclick="startGame();return true;">开始</button>  
                     <button id="btnPause" onclick="pauseGame();return true;" disabled="disabled">暂停</button>  
                     <button id="btnReset" onclick="resetGame();return true;" disabled="disabled">重置</button>  
@@ -21,20 +20,19 @@
                     <button id="btnChange" onclick="changeCol();return true;">更换颜色</button>
                 </td>  
             </tr>  
-            <tr align="center">  
-                <td colspan="2"><canvas id="space" width="500" height="500" style="border: 1px solid; background-color: #eeeeee;cursor: default;" /></td>  
+            <tr id='canvas'>  
+                <td colspan="2"><canvas id="space" width="500" height="500" style="border: 1px solid; background-color: #eeeeee;cursor: default;" ></canvas></td>  
             </tr>  
-            <tr align="center">  
-                <td colspan="2" align="right">
-                	<hr />
-                	<a href="http://validator.w3.org/check/referer"><img src="img/valid-xhtml11.png"/></a>
-                	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img src="img/vcss.gif"/></a>
+            <tr>  
+                <td id="w3c" colspan="2" >
+                	<a href="http://validator.w3.org/check/referer"><img alt="HTML代码验证" src="img/valid-xhtml11.png"/></a>
+                	<a href="http://jigsaw.w3.org/css-validator/check/referer"><img alt='CSS3代码验证' src="img/vcss.gif"/></a>
                 </td>  
             </tr>  
-        </table>  
+            
+            <script type="text/javascript" src="js/golRule.js" ></script>
+
+        </table>   
     </body>  
     
-	<script type="text/javascript" src="js/golRule.js" ></script>
-	<!--<script type="text/javascript">window.addEventListener("load", loadGame, true);</script>-->
-	<script type="text/javascript">window.onload=loadGame();</script>
-<html>  
+</html>  

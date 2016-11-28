@@ -228,3 +228,4 @@ function changeCol(){
 	}
 }
 
+window.onload=loadGame();

@@ -1,0 +1,22 @@
+body{
+	margin: 0;
+	font-family: "微软雅黑";
+	background: url(../img/background.png) repeat scroll top left;
+}
+table{
+	border-collapse:collapse;
+}
+table, th, td{
+	margin: 50px auto;
+	text-align: center;
+	border: 3px  solid gray;
+	background-color: whitesmoke;
+	
+}
+#tittle{
+	color: deepskyblue;
+}
+#w3c{
+	text-align: right;
+}
+
